@@ -156,6 +156,7 @@ class Contact {
 class UI {
 	static displayContact() {
 		const contacts = Store.getcontact();
+		contacts.forEach((contact) => UI.addContactToList(contact));
 	}
 	static addContactToList(contact){
 	const list = document.querySelector('#contact-list')
@@ -169,6 +170,7 @@ class UI {
 		<td><a href="#" class="btn btn-danger btn-sm delete"> X </a></td>`;
 	list.appendChild(row);
 	}
+	//	Delete Contact
 	static deleteContact(el){
 		if(el.classList.contains('delete')){
 			el.parentElement.parentElement.remove();
@@ -207,7 +209,7 @@ class Store {
 	static removeContact(name) {
 		const contacts = Store.getcontact();
 		contacts.forEach((contact,index) => {
-			if(contact.subject === subject ){
+			if(contact.name === name ){
 				contacts.splice(index,1);
 			}
 		});
@@ -231,7 +233,7 @@ if(subject === '' || name === '' || email === '' || phone === '' || message === 
     const contact =new Contact(subject,name,email,phone,message);
     UI.addContactToList(contact);
     Store.addContact(contact);
-	UI.clearFields();
+		UI.clearFields();
 	
   }
 

@@ -173,6 +173,8 @@ class UI {
 	//	Delete Contact
 	static deleteContact(el){
 		if(el.classList.contains('delete')){
+			console.log("ReSTO");
+			
 			el.parentElement.parentElement.remove();
 		}
 	
@@ -206,11 +208,13 @@ class Store {
 		contacts.push(contact);
 		localStorage.setItem('contacts', JSON.stringify(contacts));
 	}
-	static removeContact(name) {
+	static removeContact(message) {
 		const contacts = Store.getcontact();
+		console.log(message);
 		contacts.forEach((contact,index) => {
-			if(contact.name === name ){
+			if(contact.message === message ){
 				contacts.splice(index,1);
+				console.log("ReSTO");
 			}
 		});
 		localStorage.setItem('contacts',JSON.stringify(contacts));
@@ -243,6 +247,7 @@ document.querySelector('#contact-list').addEventListener('click', (e) => {
 
 	UI.deleteContact(e.target);
 	// Remove book from store
+	console.log("ReSTO");
 	Store.removeContact(e.target.parentElement.previousElementSibling.textContent);
 	//UI.showAlert('Contact Removed', 'success');
   });
